@@ -1,0 +1,59 @@
+/*
+Given an integer x, return true if x is a palindrome, and false otherwise.
+
+ 
+
+Example 1:
+
+Input: x = 121
+Output: true
+Explanation: 121 reads as 121 from left to right and from right to left.
+Example 2:
+
+Input: x = -121
+Output: false
+Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+Example 3:
+
+Input: x = 10
+Output: false
+Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+ 
+
+Constraints:
+
+-231 <= x <= 231 - 1
+ 
+
+Follow up: Could you solve it without converting the integer to a string?
+*/
+
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+
+const testCases=[
+    121,
+    -121,
+    10,
+    123321,
+    1234321
+]
+
+let isPalindrome = function(x) {
+    if(x<0 || (x%10===0 && x!==0)) return false;
+
+    let reversed = 0;
+
+    while (x>reversed){
+        reversed = reversed*10 + x%10; // x%10 = ultimo digito de x. 
+        x=Math.floor(x/10); // Quitamos el ultimo dijito de x
+    }
+    //    Para nums pares   Para n impares   
+    return x ===reversed || x === Math.floor(reversed/10) // Quita el numero del medio de x original
+};
+
+for (let i = 0; i < testCases.length; i++) {
+    console.log(`Test case ${i + 1}:`, isPalindrome(testCases[i]));
+}
